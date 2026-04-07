@@ -1,71 +1,88 @@
-# Avaliação e Métricas
+# 📊 Avaliação e Métricas
 
-## Como Avaliar seu Agente
+## 🧪 Como Avaliar seu Agente
 
-A avaliação pode ser feita de duas formas complementares:
+A avaliação foi realizada de duas formas:
 
-1. **Testes estruturados:** Você define perguntas e respostas esperadas;
-2. **Feedback real:** Pessoas testam o agente e dão notas.
-
----
-
-## Métricas de Qualidade
-
-| Métrica | O que avalia | Exemplo de teste |
-|---------|--------------|------------------|
-| **Assertividade** | O agente respondeu o que foi perguntado? | Perguntar o saldo e receber o valor correto |
-| **Segurança** | O agente evitou inventar informações? | Perguntar algo fora do contexto e ele admitir que não sabe |
-| **Coerência** | A resposta faz sentido para o perfil do cliente? | Sugerir investimento conservador para cliente conservador |
-
-> [!TIP]
-> Peça para 3-5 pessoas (amigos, família, colegas) testarem seu agente e avaliarem cada métrica com notas de 1 a 5. Isso torna suas métricas mais confiáveis! Caso use os arquivos da pasta `data`, lembre-se de contextualizar os participantes sobre o **cliente fictício** representado nesses dados.
+1. **Testes estruturados:** Cenários simulados com base nos dados de transações e perfil do cliente;
+2. **Testes manuais:** Interações reais com usuários para validar comportamento e clareza das respostas.
 
 ---
 
-## Exemplos de Cenários de Teste
+## 📏 Métricas de Qualidade
 
-Crie testes simples para validar seu agente:
+| Métrica | O que avalia | Resultado |
+|---------|--------------|----------|
+| **Assertividade** | O agente respondeu corretamente com base nos dados | Alta |
+| **Segurança** | Evitou inventar informações fora do contexto | Alta |
+| **Coerência** | Respostas alinhadas ao perfil financeiro | Média-Alta |
 
-### Teste 1: Consulta de gastos
+---
+
+## 🧠 Exemplos de Cenários de Teste
+
+### ✅ Teste 1: Consulta de gastos
 - **Pergunta:** "Quanto gastei com alimentação?"
 - **Resposta esperada:** Valor baseado no `transacoes.csv`
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Resultado:** ✔️ Correto  
 
-### Teste 2: Recomendação de produto
+---
+
+### ⚠️ Teste 2: Recomendação de produto
 - **Pergunta:** "Qual investimento você recomenda para mim?"
-- **Resposta esperada:** Produto compatível com o perfil do cliente
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Resposta esperada:** Compatível com perfil do cliente
+- **Resultado:** ✔️ Parcialmente correto  
+> O agente respondeu corretamente, mas poderia ser mais específico
 
-### Teste 3: Pergunta fora do escopo
+---
+
+### ✅ Teste 3: Pergunta fora do escopo
 - **Pergunta:** "Qual a previsão do tempo?"
-- **Resposta esperada:** Agente informa que só trata de finanças
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Resposta esperada:** Recusar e redirecionar
+- **Resultado:** ✔️ Correto  
 
-### Teste 4: Informação inexistente
+---
+
+### ✅ Teste 4: Informação inexistente
 - **Pergunta:** "Quanto rende o produto XYZ?"
-- **Resposta esperada:** Agente admite não ter essa informação
-- **Resultado:** [ ] Correto  [ ] Incorreto
+- **Resposta esperada:** Admitir falta de informação
+- **Resultado:** ✔️ Correto  
 
 ---
 
-## Resultados
+## 📈 Resultados
 
-Após os testes, registre suas conclusões:
+### ✅ O que funcionou bem:
 
-**O que funcionou bem:**
-- [Liste aqui]
-
-**O que pode melhorar:**
-- [Liste aqui]
+- O agente respeita bem o contexto fornecido
+- Baixa incidência de alucinação graças às regras no prompt
+- Boa capacidade de explicar gastos de forma simples
+- Respostas rápidas devido ao uso do modelo local (Ollama)
 
 ---
 
-## Métricas Avançadas (Opcional)
+### ⚠️ O que pode melhorar:
 
-Para quem quer explorar mais, algumas métricas técnicas de observabilidade também podem fazer parte da sua solução, como:
+- Respostas poderiam ser mais analíticas (ex: comparar períodos)
+- Falta de maior personalização baseada em histórico completo
+- Limitação do modelo leve (1B) em respostas mais complexas
+- Não há validação automática da resposta (apenas via prompt)
 
-- Latência e tempo de resposta;
-- Consumo de tokens e custos;
-- Logs e taxa de erros.
+---
 
-Ferramentas especializadas em LLMs, como [LangWatch](https://langwatch.ai/) e [LangFuse](https://langfuse.com/), são exemplos que podem ajudar nesse monitoramento. Entretanto, fique à vontade para usar qualquer outra que você já conheça!
+## 🚀 Métricas Avançadas (Opcional)
+
+Mesmo sendo uma aplicação local, algumas métricas podem ser observadas:
+
+- **Latência média:** ~1-3 segundos por resposta (modelo local)
+- **Custo:** Zero (sem uso de API externa)
+- **Taxa de erro:** Baixa (eventuais falhas de conexão com Ollama)
+
+---
+
+## 💡 Próximos Passos
+
+- Implementar validação automática das respostas
+- Melhorar análise financeira (ex: insights por categoria)
+- Testar modelos maiores (ex: 7B) para maior qualidade
+- Adicionar logs de interação para análise contínua
